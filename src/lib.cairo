@@ -1,8 +1,8 @@
 use core::zeroable::Zeroable;
 // use web3LagosWorkshop::IERC20;
-#[starknet::interface]
 use starknet::ContractAddress;
 
+#[starknet::interface]
 trait IERC20<TContractState> {
     fn name(self: @TContractState) -> felt252;
     fn symbol(self: @TContractState) -> felt252;
@@ -59,9 +59,7 @@ mod ERC20 {
     }
 
     #[constructor]
-    fn constructor(
-        ref self: ContractState, name: felt252, symbol: felt252, decimals: u8, total_supply: u256
-    ) {
+    fn constructor(ref self: ContractState, name: felt252, symbol: felt252, decimals: u8) {
         self.name.write(name);
         self.symbol.write(symbol);
         self.decimals.write(decimals);
@@ -181,3 +179,50 @@ mod ERC20 {
         }
     }
 }
+// #[cfg(test)]
+// mod test {
+//     use core::result::ResultTrait;
+// use web3lagosworkshop::IERC20SafeDispatcherTrait;
+// use core::traits::TryInto;
+//     use core::array::ArrayTrait;
+//     use super::ERC20;
+//     use snforge_std::{declare, ContractClassTrait};
+//     use super::IERC20Dispatcher;
+//     use super::IERC20DispatcherTrait;
+//     use starknet::ContractAddress;
+//     use super::IERC20SafeDispatcher;
+
+//     const tokenName: felt252 = 'TestToken';
+//     const decimals: felt252 = 18;
+//     const symbol: felt252 = 'TTK';
+
+//     // OZ 
+//     mod Errors {
+//         const INVALID_NAME: felt252 = 'Invalid name';
+//         const INVALID_SYMBOL: felt252 = 'Invalid symbol';
+//     }
+
+//     fn setup(name:felt252) -> ContractAddress {
+//         // declare contract
+//         let contract = declare(name);
+//         // deploy contract
+//         let mut calldata = ArrayTrait::new();
+//         calldata.append('TestToken');
+//         calldata.append('TTK');
+//         calldata.append(18);
+
+//         let contract_address = contract.deploy(@calldata).unwrap();
+//         // create a dispatcher object that will allow interacting with the deployed contract
+//         contract_address
+//     }
+
+// #[test]
+// fn test_token_name() {
+//     let contract_address = setup('ERC20');
+//     let dispatcher = IERC20SafeDispatcher {  contract_address };
+//     let result_name = dispatcher.name().unwrap();
+//     assert(result_name == 'TestToken', Errors::INVALID_NAME);
+// }
+// }
+
+

@@ -1,15 +1,12 @@
 [package]
-name = "web3LagosWorkshop"
+name = "web3lagosworkshop"
 version = "0.1.0"
 
-# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
-
-[[target.starknet-contract]]
-sierra = true
-casm = true
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
 
 [dependencies]
-starknet = "2.1.0-rc2"
+snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.9.1" }
+starknet = "2.3.0"
 
-[tool.snforge]
-# exit_first = true
+[[target.starknet-contract]]
+casm = true
